@@ -44,6 +44,10 @@ pandas==3.0.3
     #   mlxtend
 pillow==12.2.0
     # via matplotlib
+polars==1.41.2
+    # via -r ml/requirements.in
+polars-runtime-32==1.41.2
+    # via polars
 psycopg2-binary==2.9.12
     # via -r ml/requirements.in
 pyarrow==24.0.0

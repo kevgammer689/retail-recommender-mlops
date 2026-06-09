@@ -1,5 +1,6 @@
 pandas
 numpy
+polars
 scikit-learn
 scipy
 mlxtend
@@ -9,3 +10,4 @@ sqlalchemy
 psycopg2-binary
 python-dotenv
 tqdm
+
