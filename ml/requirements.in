@@ -1,0 +1,11 @@
+pandas
+numpy
+scikit-learn
+scipy
+mlxtend
+joblib
+pyarrow
+sqlalchemy
+psycopg2-binary
+python-dotenv
+tqdm

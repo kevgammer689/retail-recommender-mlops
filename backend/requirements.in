@@ -1,0 +1,12 @@
+fastapi
+uvicorn[standard]
+pydantic
+pydantic-settings
+sqlalchemy
+psycopg2-binary
+python-dotenv
+google-cloud-aiplatform
+google-auth
+httpx
+python-jose[cryptography]
+passlib[bcrypt]
