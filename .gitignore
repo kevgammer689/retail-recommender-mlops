@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+
+# Data
+data/raw/*
+data/processed/*
+data/external/*
+data/sample/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/external/.gitkeep
+!data/sample/.gitkeep
+
+# Artifacts
+artifacts/models/*
+artifacts/metadata/*
+artifacts/reports/*
+!artifacts/models/.gitkeep
+!artifacts/metadata/.gitkeep
+!artifacts/reports/.gitkeep
+
+# OS / IDE
+.DS_Store
+.vscode/
+.idea/
+
+# Logs
+*.log
+logs/
