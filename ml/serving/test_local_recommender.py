@@ -14,7 +14,12 @@ PRODUCTS_PATH = PROJECT_ROOT / "data" / "raw" / "instacart" / "products.csv"
 
 # Productos de prueba.
 # 24852 suele ser Banana en Instacart.
-SAMPLE_CART_PRODUCT_IDS = [24852]
+#SAMPLE_CART_PRODUCT_IDS = [24852]
+# Carrito de prueba con varios productos:
+# 24852 = Banana
+# 21137 = Organic Strawberries
+# 47766 = Organic Avocado
+SAMPLE_CART_PRODUCT_IDS = [24852, 21137, 47766]
 
 TOP_K = 10
 
