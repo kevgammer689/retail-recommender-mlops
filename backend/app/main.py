@@ -2,6 +2,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
+from backend.app.routes.metrics import router as metrics_router
 from backend.app.routes.recommender import router as recommender_router
 from backend.app.services.recommender_service import get_recommender_service
 
@@ -19,3 +20,4 @@ app = FastAPI(
     lifespan=lifespan,
 )
 app.include_router(recommender_router)
+app.include_router(metrics_router)
