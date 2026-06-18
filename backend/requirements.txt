@@ -120,11 +120,15 @@ idna==3.18
     #   requests
 iniconfig==2.3.0
     # via pytest
+numpy==2.4.6
+    # via pandas
 packaging==26.2
     # via
     #   google-cloud-aiplatform
     #   google-cloud-bigquery
     #   pytest
+pandas==3.0.3
+    # via -r backend/requirements.in
 passlib[bcrypt]==1.7.4
     # via -r backend/requirements.in
 pluggy==1.6.0
@@ -144,6 +148,8 @@ protobuf==6.33.6
     #   grpcio-status
     #   proto-plus
 psycopg2-binary==2.9.12
+    # via -r backend/requirements.in
+pyarrow==24.0.0
     # via -r backend/requirements.in
 pyasn1==0.6.3
     # via
@@ -170,7 +176,9 @@ pygments==2.20.0
 pytest==9.1.0
     # via -r backend/requirements.in
 python-dateutil==2.9.0.post0
-    # via google-cloud-bigquery
+    # via
+    #   google-cloud-bigquery
+    #   pandas
 python-dotenv==1.2.2
     # via
     #   -r backend/requirements.in
@@ -218,6 +226,8 @@ typing-inspection==0.4.2
     #   fastapi
     #   pydantic
     #   pydantic-settings
+tzdata==2026.2
+    # via pandas
 urllib3==2.7.0
     # via requests
 uvicorn[standard]==0.49.0

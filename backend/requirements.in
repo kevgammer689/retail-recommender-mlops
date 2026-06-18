@@ -8,6 +8,8 @@ python-dotenv
 google-cloud-aiplatform
 google-auth
 httpx
+pandas
+pyarrow
 pytest
 python-jose[cryptography]
 passlib[bcrypt]
