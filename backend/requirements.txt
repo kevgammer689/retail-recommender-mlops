@@ -30,6 +30,7 @@ click==8.4.1
 colorama==0.4.6
     # via
     #   click
+    #   pytest
     #   uvicorn
 cryptography==48.0.0
     # via
@@ -117,12 +118,17 @@ idna==3.18
     #   anyio
     #   httpx
     #   requests
+iniconfig==2.3.0
+    # via pytest
 packaging==26.2
     # via
     #   google-cloud-aiplatform
     #   google-cloud-bigquery
+    #   pytest
 passlib[bcrypt]==1.7.4
     # via -r backend/requirements.in
+pluggy==1.6.0
+    # via pytest
 proto-plus==1.28.0
     # via
     #   google-api-core
@@ -158,6 +164,10 @@ pydantic==2.13.4
 pydantic-core==2.46.4
     # via pydantic
 pydantic-settings==2.14.1
+    # via -r backend/requirements.in
+pygments==2.20.0
+    # via pytest
+pytest==9.1.0
     # via -r backend/requirements.in
 python-dateutil==2.9.0.post0
     # via google-cloud-bigquery
