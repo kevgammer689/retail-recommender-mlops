@@ -103,6 +103,25 @@ curl http://127.0.0.1:8000/metrics/summary
 
 Ejecutar primero al menos una recomendación para observar métricas con datos.
 
+## Check operativo de punta a punta
+
+Con los servicios levantados, ejecutar desde la raíz del repositorio:
+
+```cmd
+python scripts\check_local_stack.py
+```
+
+Para indicar otra URL de la API:
+
+```cmd
+python scripts\check_local_stack.py --base-url http://127.0.0.1:8000
+```
+
+El script valida los archivos requeridos, los cuatro endpoints, la estructura
+de las recomendaciones y que las métricas reporten al menos un request
+registrado. Devuelve código `0` si todo está correcto y código `1` con un
+mensaje `[FAIL]` si encuentra un problema. No inicia ni detiene Docker.
+
 ## Ver logs en PostgreSQL
 
 ```cmd
