@@ -122,6 +122,33 @@ de las recomendaciones y que las métricas reporten al menos un request
 registrado. Devuelve código `0` si todo está correcto y código `1` con un
 mensaje `[FAIL]` si encuentra un problema. No inicia ni detiene Docker.
 
+## Uso con frontend separado
+
+El frontend está implementado como demo local en
+`C:\Users\Lenovo\Desktop\retail-recommender-frontend`, pero no forma parte del
+Docker Compose actual. Primero se levantan y validan PostgreSQL y FastAPI desde
+este repositorio:
+
+```cmd
+cd C:\Users\Lenovo\Desktop\retail-recommender-mlops
+docker compose -f infra\docker\docker-compose.yml up -d --build
+python scripts\check_local_stack.py
+```
+
+Después, desde el repositorio del frontend, instalar dependencias y crear el
+archivo `.env` desde `.env.example` si todavía no existen:
+
+```cmd
+cd C:\Users\Lenovo\Desktop\retail-recommender-frontend
+copy .env.example .env
+npm install
+npm run dev
+```
+
+Los mismos comandos funcionan en CMD y PowerShell. La interfaz queda disponible
+en `http://127.0.0.1:5173` y consume el backend esperado en
+`http://127.0.0.1:8000`.
+
 ## Ver logs en PostgreSQL
 
 ```cmd
@@ -204,5 +231,7 @@ CMD o PowerShell indicado arriba.
 
 ## Funcionalidad fuera del alcance actual
 
-Este entorno todavía no incluye frontend, autenticación, Vertex AI, CI/CD ni
-monitoreo avanzado con alertas o dashboards.
+Existe un frontend separado implementado como demo local. Su integración en
+Docker Compose y un despliegue productivo siguen pendientes. Este entorno no
+incluye autenticación, Vertex AI, CI/CD ni monitoreo avanzado con alertas o
+dashboards.

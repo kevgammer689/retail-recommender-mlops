@@ -60,14 +60,26 @@ Ejemplo mínimo de entrada para `/recommend`:
 }
 ```
 
+## Frontend separado
+
+El frontend está implementado como una demo local en el repositorio/carpeta
+`retail-recommender-frontend`, con React, Vite y TypeScript. Consume los
+endpoints `GET /health`, `GET /model-info`, `POST /recommend` y
+`GET /metrics/summary` de la API FastAPI.
+
+En desarrollo se ejecuta en `http://127.0.0.1:5173` y espera el backend en
+`http://127.0.0.1:8000`. No entrena modelos ni accede directamente a
+PostgreSQL. Todavía no forma parte del Docker Compose de este repositorio.
+
 ## Estado y límites actuales
 
 La implementación actual cubre serving local, tests de API, logging básico,
-métricas agregadas y ejecución con Docker Compose.
+métricas agregadas, ejecución con Docker Compose y un frontend separado
+implementado como demo local.
 
 Todavía no están implementados:
 
-- frontend;
+- integración del frontend en Docker Compose o un despliegue productivo;
 - autenticación y autorización;
 - despliegue o serving en Vertex AI;
 - pipeline de CI/CD;
