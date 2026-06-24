@@ -5,8 +5,11 @@ import pandas as pd
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_MODEL_PATH = (
+V1_MODEL_PATH = (
     PROJECT_ROOT / "artifacts" / "models" / "item_item_recommender_v1.parquet"
+)
+V2_MODEL_PATH = (
+    PROJECT_ROOT / "artifacts" / "models" / "item_item_recommender_v2.parquet"
 )
 DEFAULT_PRODUCTS_PATH = (
     PROJECT_ROOT / "data" / "raw" / "instacart" / "products.csv"
@@ -32,12 +35,18 @@ class LocalItemItemRecommender:
         model_path: str | Path | None = None,
         products_path: str | Path | None = None,
     ) -> None:
-        self.model_path = Path(model_path) if model_path else DEFAULT_MODEL_PATH
+        self.model_path = (
+            Path(model_path) if model_path else self._resolve_default_model_path()
+        )
         self.products_path = (
             Path(products_path) if products_path else DEFAULT_PRODUCTS_PATH
         )
         self.model = self._load_model()
         self.products = self._load_products()
+
+    @staticmethod
+    def _resolve_default_model_path() -> Path:
+        return V2_MODEL_PATH if V2_MODEL_PATH.exists() else V1_MODEL_PATH
 
     def _load_model(self) -> pd.DataFrame:
         if not self.model_path.exists():
@@ -47,7 +56,6 @@ class LocalItemItemRecommender:
         required_columns = {
             "source_product_id",
             "recommended_product_id",
-            "score",
             "cooccurrence_count",
         }
         missing_columns = required_columns.difference(model.columns)
@@ -55,6 +63,19 @@ class LocalItemItemRecommender:
             raise ValueError(
                 "Model artifact is missing required columns: "
                 f"{sorted(missing_columns)}"
+            )
+
+        if "final_score" in model.columns:
+            model = model.copy()
+            model["score"] = model["final_score"]
+            self.model_version = "v2"
+            self.scoring = "lift_log_cooccurrence"
+        elif "score" in model.columns:
+            self.model_version = "v1"
+            self.scoring = "confidence"
+        else:
+            raise ValueError(
+                "Model artifact must include either 'final_score' or 'score'"
             )
 
         return model

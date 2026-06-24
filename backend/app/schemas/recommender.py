@@ -9,6 +9,8 @@ class HealthResponse(BaseModel):
 class ModelInfoResponse(BaseModel):
     model_type: str
     serving_mode: str
+    model_version: str
+    scoring: str
     total_rows: int
     total_source_products: int
     total_recommended_products: int

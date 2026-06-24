@@ -7,8 +7,11 @@ import httpx
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-MODEL_PATH = (
+V1_MODEL_PATH = (
     PROJECT_ROOT / "artifacts" / "models" / "item_item_recommender_v1.parquet"
+)
+V2_MODEL_PATH = (
+    PROJECT_ROOT / "artifacts" / "models" / "item_item_recommender_v2.parquet"
 )
 PRODUCTS_PATH = PROJECT_ROOT / "data" / "raw" / "instacart" / "products.csv"
 SAMPLE_CART_PRODUCT_IDS = [24852, 21137, 47766]
@@ -48,8 +51,9 @@ def require_json_object(response: httpx.Response, endpoint: str) -> dict[str, An
 
 
 def check_required_files() -> None:
-    require(MODEL_PATH.is_file(), f"missing required artifact: {MODEL_PATH}")
-    print_ok("artifact exists")
+    model_path = V2_MODEL_PATH if V2_MODEL_PATH.is_file() else V1_MODEL_PATH
+    require(model_path.is_file(), f"missing required artifact: {model_path}")
+    print_ok(f"artifact exists ({model_path.name})")
 
     require(PRODUCTS_PATH.is_file(), f"missing required catalog: {PRODUCTS_PATH}")
     print_ok("products.csv exists")
@@ -70,6 +74,11 @@ def check_api(base_url: str) -> None:
             isinstance(model_info.get("total_rows"), int)
             and model_info["total_rows"] > 0,
             "/model-info reports an empty model artifact",
+        )
+        expected_version = "v2" if V2_MODEL_PATH.is_file() else "v1"
+        require(
+            model_info.get("model_version") == expected_version,
+            f"/model-info did not load the expected {expected_version} artifact",
         )
         print_ok("/model-info")
 

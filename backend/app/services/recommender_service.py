@@ -17,6 +17,8 @@ class RecommenderService:
         return {
             "model_type": "item_item_cooccurrence_recommender",
             "serving_mode": "local",
+            "model_version": self.recommender.model_version,
+            "scoring": self.recommender.scoring,
             "total_rows": int(len(model)),
             "total_source_products": int(model["source_product_id"].nunique()),
             "total_recommended_products": int(

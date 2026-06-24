@@ -40,6 +40,8 @@ def test_model_info_endpoint(client: TestClient) -> None:
     model_info = response.json()
     assert model_info["model_type"] == "item_item_cooccurrence_recommender"
     assert model_info["serving_mode"] == "local"
+    assert model_info["model_version"] in {"v1", "v2"}
+    assert model_info["scoring"] in {"confidence", "lift_log_cooccurrence"}
     assert model_info["total_rows"] > 0
     assert model_info["total_source_products"] > 0
     assert model_info["total_recommended_products"] > 0
