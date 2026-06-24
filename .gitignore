@@ -31,3 +31,6 @@ artifacts/reports/*
 # Logs
 *.log
 logs/
+
+# Docs
+docs/
